@@ -1,9 +1,13 @@
-/*global describe, it*/
-
 describe('functions', () => {
-  describe('happyHolidays', () => {
-    it('returns "Happy holidays!"', () => {
-      expect(happyHolidays()).toEqual('Happy holidays!')
+  describe('happyHolidays', function() {
+    it('logs Happy holidays!', function() {
+      const spy = expect.spyOn(console, 'log').andCallThrough();
+  
+      happyHolidays();
+  
+      expect(spy).toHaveBeenCalledWith('Happy holidays!');
+  
+      console.log.restore();
     })
   })
 
@@ -21,10 +25,15 @@ describe('functions', () => {
     })
   })
 
-  describe('holidayCountdown(holiday, days)', () => {
-    it('returns "It\'s ${days} days until ${holiday}!"', () => {
-      expect(holidayCountdown("Mother's Day", 20)).toEqual("It's 20 days until Mother's Day!")
-      expect(holidayCountdown("Father's Day", 120)).toEqual("It's 120 days until Father's Day!")
+  describe('happyCustomHolidayWithNameOptional(holiday, name)', function() {
+    it('takes in two arguments, a name and a holiday, and name defaults to you', function() {
+      expect(happyCustomHolidayWithNameOptional("Kwanzaa")).toEqual("Happy Kwanzaa, you!");
     })
   })
+  
+  describe('happyCustomHolidayWithNameOptional(holiday, name)', function() {
+    it('takes in two arguments, a name and a holiday, and the default value can be overridden with an argument', function() {
+      expect(happyCustomHolidayWithNameOptional("Diwali", "Gracie")).toEqual("Happy Diwali, Gracie!");
+    })
+  })  
 })
